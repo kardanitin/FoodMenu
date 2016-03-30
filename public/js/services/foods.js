@@ -5,9 +5,9 @@ angular.module('foodService', [])
 	.factory('Foods', ['$http',function($http) {
 		return {
 			get : function() {
-				return $http.get('/api/foods');
+				return $http.get('/api/food');
 			},
-			create : function(foodData) {
+			add : function(foodData) {
 				return $http.post('/api/food', foodData);
 			},
 			delete : function(id) {

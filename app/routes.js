@@ -8,7 +8,7 @@ function getFoods(res) {
             res.send(err);
         }
 
-        res.json(foods); // return all todos in JSON format
+        res.json(foods); // return all food items in JSON format
     });
 }
 ;
@@ -16,16 +16,16 @@ function getFoods(res) {
 module.exports = function (app) {
 
     // api ---------------------------------------------------------------------
-    // get all todos
-    app.get('/api/foods', function (req, res) {
-        // use mongoose to get all todos in the database
+    // get all food items
+    app.get('/api/food', function (req, res) {
+        // use mongoose to get all food items in the database
         getFoods(res);
     });
 
-    // create todo and send back all todos after creation
+    // create food item and send back all food items after creation
     app.post('/api/food', function (req, res) {
 
-        // create a todo, information comes from AJAX request from Angular
+        // create a food item, information comes from AJAX request from Angular
         Food.create({
             name: req.body.name,
             price: req.body.price
@@ -33,13 +33,13 @@ module.exports = function (app) {
             if (err)
                 res.send(err);
 
-            // get and return all the todos after you create another
+            // get and return all the food items after you create another
             getFoods(res);
         });
 
     });
 
-    // delete a todo
+    // delete a food item
     app.delete('/api/food/:food_id', function (req, res) {
         Food.remove({
             _id: req.params.food_id
@@ -53,12 +53,13 @@ module.exports = function (app) {
 
     //Calculate the total of bill
         app.get('/api/total', function (req, res) {
-        // use mongoose to get all todos in the database
+        // use mongoose to get all food items in the database
             Food.find(function (err, foods) {
-            var total_cost =0    ;
+            var total_cost =0 ;
             foods.forEach(function(food){
                 total_cost += food.price;
             }); 
+            // Adding 7.5 % tax
             total_cost += 0.075 * total_cost;
             res.json({'total_cost':total_cost});
         });

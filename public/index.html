@@ -7,7 +7,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"><!-- Optimize mobile viewport -->
 
-	<title>Node/Angular Todo App</title>
+	<title>Node/Angular Food Menu App</title>
 
 	<!-- SCROLLS -->
 	<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css"><!-- load bootstrap -->
@@ -15,15 +15,16 @@
 	<style>
 		html 					{ overflow-y:scroll; }
 		body 					{ padding-top:50px; }
-		#todo-list 				{ margin-bottom:30px; }
-		#todo-form 	 			{ margin-bottom:50px; }
+		#food-list 				{ margin-bottom:30px; }
+		#food-getTotal-form 	{ margin-bottom:50px; }
+		#food-addItem-form 		{ margin-bottom:50px; }
 	</style>
 
 	<!-- SPELLS -->
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.16/angular.min.js"></script><!-- load angular -->
 
 	<script src="js/controllers/main.js"></script> <!-- load up our controller -->
-	<script src="js/services/foods.js"></script> <!-- load our todo service -->
+	<script src="js/services/foods.js"></script> <!-- load our food service -->
 	<script src="js/core.js"></script> <!-- load our main application -->
 
 </head>
@@ -31,13 +32,13 @@
 <body ng-controller="mainController">
 	<div class="container">
 
-		<!-- HEADER AND TODO COUNT -->
+		<!-- HEADER AND Food Item COUNT -->
 		<div class="jumbotron text-center">
-			<h1>I'm a Food-aholic <span class="label label-info">{{ foods.length }}</span></h1>
+			<h1>I'm a Food-aholic and My Menu has <span class="label label-info">{{ foods.length }}</span> items</h1>
 		</div>
 
-		<!-- TODO LIST -->
-		<div id="todo-list" class="row">
+		<!-- Food Menu LIST -->
+		<div id="food-list" class="row">
 			<div class="col-sm-4 col-sm-offset-4">
 				<table class="table table-bordered">
 				<tr>
@@ -61,10 +62,9 @@
 		</div>
 
 		<!-- FORM TO Get Total Bill-->
-		<div id="todo-form" class="row">
+		<div id="food-getTotal-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
-					<!-- createToDo() WILL CREATE NEW TODOS -->
 					<button type="submit" class="btn btn-primary btn-lg" ng-click="getTotal()">GetTotal</button>
 					<br/>
 					<h3>My Total Bill is : <span class="label label-info">{{ total.total_cost }}</span></h3>
@@ -72,8 +72,8 @@
 			</div>
 		</div>
 
-		<!-- FORM TO CREATE TODOS -->
-		<div id="todo-form" class="row">
+		<!-- FORM TO Add Food Item to Menu -->
+		<div id="food-addItem-form" class="row">
 			<div class="col-sm-8 col-sm-offset-2 text-center">
 				<form>
 					<div class="form-group">
@@ -83,13 +83,12 @@
 						<input type="number" class="form-control input-lg text-center" placeholder="Price of the Food" ng-model="formData.price">
 					</div>
 
-					<!-- createToDo() WILL CREATE NEW TODOS -->
-					<button type="submit" class="btn btn-primary btn-lg" ng-click="createFood()">Add</button>
+					<!-- addFood() WILL Add New Food Items to Menu -->
+					<button type="submit" class="btn btn-primary btn-lg" ng-click="addFood()">Add</button>
 				</form>
 			</div>
 		</div>
 
 	</div>
-
 </body>
 </html>
